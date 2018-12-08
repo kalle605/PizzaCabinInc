@@ -3,7 +3,7 @@ using PizzaCabinInc.Shared.JsonParserHelpers;
 
 namespace PizzaCabinInc.Shared.ScheduleDataProviders
 {
-	public class ScheduleDataProvider
+	public class ScheduleDataProvider : IScheduleDataProvider
 	{
 		private readonly IJsonParser jsonParser;
 		private readonly IJsonRepository jsonRepository;
