@@ -25,10 +25,10 @@ namespace PizzaCabinInc.Shared.ScheduleDataProviders
 
 			return this.jsonParser.ToObject<RootObject>(json).ScheduleResult;
 		}
+	}
 
-		private class RootObject
-		{
-			public ScheduleResult ScheduleResult { get; set; }
-		}
+	public class RootObject
+	{
+		public ScheduleResult ScheduleResult { get; set; }
 	}
 }

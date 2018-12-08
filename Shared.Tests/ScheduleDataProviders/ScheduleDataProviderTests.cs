@@ -37,7 +37,7 @@ namespace PizzaCabinIncTests.ScheduleDataProviders
 
 			this.urlProvider.Setup(s => s.GetUrl()).Returns(url);
 			this.jsonRepository.Setup(s => s.Get(url)).Returns(json);
-			this.jsonParser.Setup(s => s.ToObject<ScheduleResult>(json)).Returns(scheduleResult);
+			this.jsonParser.Setup(s => s.ToObject<RootObject>(json)).Returns(new RootObject { ScheduleResult = scheduleResult });
 
 			var result = this.dataProvider.GetSchedules();
 
