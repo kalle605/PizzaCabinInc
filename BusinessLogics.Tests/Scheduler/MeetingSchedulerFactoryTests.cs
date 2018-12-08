@@ -35,7 +35,12 @@ namespace BusinessLogics.Tests
 			var scheduler = (MeetingScheduler)result;
 
 			Assert.AreSame(this.timeService, scheduler.TimeService);
-			Assert.AreSame(this.schedueResult, scheduler.ScheduleResult);
+
+			Assert.IsInstanceOfType(scheduler.MeetingSchedulerCalculator, typeof(MeetingSchedulerCalculator));
+
+			var calculator = (MeetingSchedulerCalculator)scheduler.MeetingSchedulerCalculator;
+
+			Assert.AreSame(this.schedueResult, calculator.ScheduleResult);
 		}
 	}
 }

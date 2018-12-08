@@ -7,15 +7,9 @@ public struct MeetingSchedulerResult
 	public DateTimeOffset? AvailableDate { get; }
 
 	public MeetingSchedulerResult(IEnumerable<Guid> availablePersonIds
-		, DateTimeOffset? availableDate
-	) : this()
+		, DateTimeOffset availableDate) : this()
 	{
 		this.AvailablePersonIds = availablePersonIds;
 		this.AvailableDate = availableDate;
-	}
-
-	public static MeetingSchedulerResult Invalid()
-	{
-		return new MeetingSchedulerResult();
 	}
 }

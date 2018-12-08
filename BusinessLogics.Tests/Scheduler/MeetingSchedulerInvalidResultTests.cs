@@ -2,8 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PizzaCabinInc.Shared.DTO.ScheduleInformation;
+using Shared.Scheduler;
 using Shared.TimeService;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TestHelpers;
 
@@ -24,9 +26,13 @@ namespace BusinessLogics.Tests
 
 			var timeService = Mock.Of<ITimeService>(s => s.CurrentDate == this.currentDate);
 
+			var meetingSchedulerCalculator = Mock.Of<IMeetingSchedulerCalculator>(s => s.GetAvailableMeetings(It.IsAny<int>()
+				, It.IsAny<ISet<Guid>>()
+				, this.currentDate) == Enumerable.Empty<MeetingSchedulerResult>());
+
 			this.scheduler = new MeetingScheduler(timeService
-				, this.scheduleResult);
-		}		
+				, meetingSchedulerCalculator);
+		}
 
 		[TestMethod]
 		public void GetNextAvailableDateShouldBeAbleToHandleInvalidResult()

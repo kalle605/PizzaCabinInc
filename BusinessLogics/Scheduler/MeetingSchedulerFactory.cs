@@ -18,7 +18,9 @@ namespace BusinessLogics.Scheduler
 
 		public IMeetingScheduler CreateScheduler()
 		{
-			return new MeetingScheduler(this.timeService, this.scheduleDataProvider.GetSchedules());
+			var meetingCalculator = new MeetingSchedulerCalculator(this.scheduleDataProvider.GetSchedules());
+
+			return new MeetingScheduler(this.timeService, meetingCalculator);
 		}
 	}
 }

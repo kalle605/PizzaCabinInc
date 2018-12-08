@@ -25,7 +25,7 @@ namespace BusinessLogics.Tests
 			var timeService = Mock.Of<ITimeService>(s => s.CurrentDate == this.currentDate);
 
 			this.scheduler = new MeetingScheduler(timeService
-				, this.scheduleResult);
+				, null);
 		}
 
 		[TestMethod]
