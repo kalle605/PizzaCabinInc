@@ -1,15 +1,16 @@
-using BusinessLogics.Scheduler;
+﻿using BusinessLogics.Scheduler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using PizzaCabinInc.Shared.DTO.ScheduleInformation;
 using Shared.TimeService;
 using System;
+using System.Linq;
 using TestHelpers;
 
 namespace BusinessLogics.Tests
 {
 	[TestClass]
-	public class MeetingSchedulerTests
+	public class MeetingSchedulerInvalidResultTests
 	{
 		private DateTime currentDate;
 		private ScheduleResult scheduleResult;
@@ -25,10 +26,10 @@ namespace BusinessLogics.Tests
 
 			this.scheduler = new MeetingScheduler(timeService
 				, this.scheduleResult);
-		}
+		}		
 
 		[TestMethod]
-		public void ShouldBeAbleToGetNextAvailableDate()
+		public void GetNextAvailableDateShouldBeAbleToHandleInvalidResult()
 		{
 			var expectedDate = new DateTimeOffset(2018, 01, 01, 08, 00, 00, TimeSpan.Zero);
 
@@ -39,11 +40,11 @@ namespace BusinessLogics.Tests
 
 			var result = this.scheduler.GetNextAvailableDate(1, personIds.ToSet());
 
-			Assert.Fail();
+			Assert.IsNull(result.AvailableDate);
 		}
 
 		[TestMethod]
-		public void ShouldBeAbleToGetAvailableDatesForToday()
+		public void GetAvailableDatesForTodayShouldBeAbleToHandleInvalidResult()
 		{
 			var expectedDate = new DateTimeOffset(2018, 01, 01, 08, 00, 00, TimeSpan.Zero);
 
@@ -54,7 +55,7 @@ namespace BusinessLogics.Tests
 
 			var result = this.scheduler.GetAvailableDatesForToday(1, personIds.ToSet());
 
-			Assert.Fail();
+			Assert.AreEqual(0, result.Count());
 		}
 	}
 }

@@ -1,8 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class MeetingSchedulerResult
+public struct MeetingSchedulerResult
 {
-	public IEnumerable<Guid> AvailablePersonIds { get; set; }
-	public DateTimeOffset AvailableDate { get; set; }
+	public IEnumerable<Guid> AvailablePersonIds { get; }
+	public DateTimeOffset? AvailableDate { get; }
+
+	public MeetingSchedulerResult(IEnumerable<Guid> availablePersonIds
+		, DateTimeOffset? availableDate
+	) : this()
+	{
+		this.AvailablePersonIds = availablePersonIds;
+		this.AvailableDate = availableDate;
+	}
+
+	public static MeetingSchedulerResult Invalid()
+	{
+		return new MeetingSchedulerResult();
+	}
 }

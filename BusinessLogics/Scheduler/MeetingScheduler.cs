@@ -3,6 +3,7 @@ using Shared.Scheduler;
 using Shared.TimeService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogics.Scheduler
 {
@@ -17,18 +18,39 @@ namespace BusinessLogics.Scheduler
 			this.TimeService = timeService;
 			this.ScheduleResult = scheduleResult;
 		}
-
-
+		
 		public IEnumerable<MeetingSchedulerResult> GetAvailableDatesForToday(int minNumberOfAttendees
-			, params Guid[] personIds)
+			, ISet<Guid> personIds)
 		{
-			throw new NotImplementedException();
+			EnsureValidParameters(minNumberOfAttendees, personIds);
+
+			return Enumerable.Empty<MeetingSchedulerResult>();
 		}
 
 		public MeetingSchedulerResult GetNextAvailableDate(int minNumberOfAttendees
-			, params Guid[] personIds)
+			, ISet<Guid> personIds)
 		{
-			throw new NotImplementedException();
+			EnsureValidParameters(minNumberOfAttendees, personIds);
+
+			return MeetingSchedulerResult.Invalid();
+		}
+
+		private static void EnsureValidParameters(int minNumberOfAttendees, ISet<Guid> personIds)
+		{
+			if (!personIds.Any())
+			{
+				throw new InvalidOperationException();
+			}
+
+			if (personIds.Count() < minNumberOfAttendees)
+			{
+				throw new InvalidOperationException();
+			}
+
+			if(minNumberOfAttendees <= 0)
+			{
+				throw new InvalidOperationException();
+			}
 		}
 	}
 }

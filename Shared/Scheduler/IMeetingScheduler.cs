@@ -14,7 +14,7 @@ namespace Shared.Scheduler
 		/// <param name="personIds">Person identities that can attend the meeting.</param>
 		/// <exception cref="InvalidOperationException"></exception>
 		MeetingSchedulerResult GetNextAvailableDate(int minNumberOfAttendees
-			, params Guid[] personIds);
+			, ISet<Guid> personIds);
 
 		/// <summary>
 		/// Gets the next available date for a meeting and throws when person identities are empty.
@@ -26,6 +26,6 @@ namespace Shared.Scheduler
 		/// <exception cref="InvalidOperationException"></exception>
 		/// <returns cref="MeetingSchedulerResult">Information about the next meeting</returns>
 		IEnumerable<MeetingSchedulerResult> GetAvailableDatesForToday(int minNumberOfAttendees
-			, params Guid[] personIds);
+			, ISet<Guid> personIds);
 	}
 }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogics\BusinessLogics.csproj" />
+    <ProjectReference Include="..\TestHelpers\TestHelpers.csproj" />
   </ItemGroup>
 
 </Project>
