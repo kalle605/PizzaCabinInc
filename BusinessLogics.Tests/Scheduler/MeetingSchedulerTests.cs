@@ -28,7 +28,7 @@ namespace BusinessLogics.Tests
 		}
 
 		[TestMethod]
-		public void ShouldBeAbleToGetNextAvailableDate()
+		public void ShouldBeAbleToGetAvailableDatesForToday()
 		{
 			const int MinNumberOfAttendees = 1;
 
@@ -37,7 +37,11 @@ namespace BusinessLogics.Tests
 
 			var personIds = new[] { personId1, personId2 }.ToSet();
 
-			var schedulerResults = new[] { new MeetingSchedulerResult() };
+			var schedulerResults = new[]
+			{
+				new MeetingSchedulerResult(null, this.currentDate.AddHours(1)),
+				new MeetingSchedulerResult(null, this.currentDate),
+			};
 
 			this.calculator
 				.Setup(s => s.GetAvailableMeetings(MinNumberOfAttendees
@@ -52,7 +56,7 @@ namespace BusinessLogics.Tests
 		}
 
 		[TestMethod]
-		public void ShouldBeAbleToGetAvailableDatesForToday()
+		public void ShouldBeAbleToGetNextAvailableDate()
 		{
 			const int MinNumberOfAttendees = 1;
 
@@ -61,8 +65,13 @@ namespace BusinessLogics.Tests
 
 			var personIds = new[] { personId1, personId2 }.ToSet();
 
-			var meetingSchedulerResult = new MeetingSchedulerResult(personIds, DateTime.Now);
-			var schedulerResults = new[] { meetingSchedulerResult };
+			var meetingSchedulerResult = new MeetingSchedulerResult(null, this.currentDate);
+
+			var schedulerResults = new[]
+			{
+				new MeetingSchedulerResult(null, this.currentDate.AddHours(1)),
+				meetingSchedulerResult,
+			};
 
 			this.calculator
 				.Setup(s => s.GetAvailableMeetings(MinNumberOfAttendees

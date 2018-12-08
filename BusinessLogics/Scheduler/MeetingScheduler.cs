@@ -27,8 +27,7 @@ namespace BusinessLogics.Scheduler
 			return this.MeetingSchedulerCalculator.GetAvailableMeetings(minNumberOfAttendees
 				, personIds
 				, this.TimeService.CurrentDate
-				)
-				.ToList();
+				);
 		}
 
 		public MeetingSchedulerResult GetNextAvailableDate(int minNumberOfAttendees
@@ -36,7 +35,9 @@ namespace BusinessLogics.Scheduler
 		{
 			EnsureValidParameters(minNumberOfAttendees, personIds);
 
-			var availableDates = this.MeetingSchedulerCalculator.GetAvailableMeetings(minNumberOfAttendees, personIds, this.TimeService.CurrentDate);
+			var availableDates = this.MeetingSchedulerCalculator
+				.GetAvailableMeetings(minNumberOfAttendees, personIds, this.TimeService.CurrentDate)
+				.OrderBy(s => s.AvailableDate);
 
 			return availableDates.FirstOrDefault();
 		}
